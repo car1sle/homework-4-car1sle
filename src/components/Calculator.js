@@ -4,23 +4,40 @@ import Screen from "./Screen";
 import { useRef, useState } from 'react';
 
 const Calculator = () => {
-  /** TODO: Here is where you are going to keep track of calculator state */
 
-  const [count, setCount] = useState(1);
+  /** TODO: Here is where you are going to keep track of calculator state */
+  const [count, setCount] = useState(0);
+  var operator;
 
   /** TODO: what happens when I click a number? */
-  const handleNumberClick = () => {
-    console.log('You clicked');
-    setCount(count + 1);
-    console.log('Current Value:', count);
+  const handleNumberClick = (value) => {
+    console.log('You clicked the number ' + value);
+    if (operator === "+") {
+      setCount(parseInt(count) + value);
+    } else if (operator === "-") {
+      setCount(parseInt(count) - value);
+    } else {
+      if (count === 0) {
+        setCount(value);
+      } else {
+        setCount('' + count + value);
+      }
+    }
   };
 
   /** TODO: what happens when I click an operation? */
-  const handleOperationClick = () => {};
+  const handleOperationClick = (value) => {
+    console.log('You clicked ' + value);
+    if (value === "clear") {
+      setCount(0);
+    } else {
+      operator = value;
+    }
+  };
 
   return (
     <div>
-      <Screen value="123" />
+      <Screen value={count} />
       <div style={{ display: "flex", gap: "0.5rem" }}>
         <div style={{ flexBasis: "33%", flexGrow: "1" }}>
           <Number value={0} onClick={handleNumberClick} />
@@ -38,9 +55,9 @@ const Calculator = () => {
         </div>
         <div style={{ flexBasis: "33%", flexGrow: "1" }}>
           <Operation value="+" onClick={handleOperationClick} />
-          <Operation value="/" onClick={handleOperationClick} />
-          <Operation value="x" onClick={handleOperationClick} />
           <Operation value="-" onClick={handleOperationClick} />
+          <Operation value="x" onClick={handleOperationClick} />
+          <Operation value="/" onClick={handleOperationClick} />
           <Operation value="=" onClick={handleOperationClick} />
         </div>
       </div>
