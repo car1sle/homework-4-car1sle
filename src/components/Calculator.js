@@ -17,10 +17,10 @@ const Calculator = () => {
     } else if (operator === "-") {
       setCount(parseInt(count) - value);
     } else {
-      if (count === 0) {
+      if (parseInt(count) === 0) {
         setCount(value);
       } else {
-        setCount('' + count + value);
+        setCount(parseInt('' + count + value));
       }
     }
   };
@@ -30,6 +30,8 @@ const Calculator = () => {
     console.log('You clicked ' + value);
     if (value === "clear") {
       setCount(0);
+    } else if (value === "=") {
+      // TODO
     } else {
       operator = value;
     }
