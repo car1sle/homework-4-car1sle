@@ -7,6 +7,7 @@ const Calculator = () => {
 
   /** TODO: Here is where you are going to keep track of calculator state */
   const [count, setCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState(0);
   var operator;
 
   /** TODO: what happens when I click a number? */
@@ -14,13 +15,23 @@ const Calculator = () => {
     console.log('You clicked the number ' + value);
     if (operator === "+") {
       setCount(parseInt(count) + value);
+      setDisplayCount(value);
     } else if (operator === "-") {
       setCount(parseInt(count) - value);
+      setDisplayCount(value);
+    } else if (operator === "x") {
+      setCount(parseInt(count) * value);
+      setDisplayCount(value);
+    } else if (operator === "/") {
+      setCount(parseInt(count) / value);
+      setDisplayCount(value);
     } else {
       if (parseInt(count) === 0) {
         setCount(value);
+        setDisplayCount(value);
       } else {
         setCount(parseInt('' + count + value));
+        setDisplayCount(parseInt('' + count + value));
       }
     }
   };
@@ -30,8 +41,9 @@ const Calculator = () => {
     console.log('You clicked ' + value);
     if (value === "clear") {
       setCount(0);
+      setDisplayCount(0);
     } else if (value === "=") {
-      // TODO
+      setDisplayCount(count);
     } else {
       operator = value;
     }
@@ -39,7 +51,7 @@ const Calculator = () => {
 
   return (
     <div>
-      <Screen value={count} />
+      <Screen value={displayCount} />
       <div style={{ display: "flex", gap: "0.5rem" }}>
         <div style={{ flexBasis: "33%", flexGrow: "1" }}>
           <Number value={0} onClick={handleNumberClick} />
