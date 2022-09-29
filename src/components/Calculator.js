@@ -12,7 +12,6 @@ const Calculator = () => {
 
   /** TODO: what happens when I click a number? */
   const handleNumberClick = (value) => {
-    console.log('You clicked the number ' + value);
     if (operator === "+") {
       setCount(parseInt(count) + value);
       setDisplayCount(value);
@@ -38,7 +37,6 @@ const Calculator = () => {
 
   /** TODO: what happens when I click an operation? */
   const handleOperationClick = (value) => {
-    console.log('You clicked ' + value);
     if (value === "clear") {
       setCount(0);
       setDisplayCount(0);
