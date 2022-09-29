@@ -1,7 +1,7 @@
 import Number from "./Number";
 import Operation from "./Operation";
 import Screen from "./Screen";
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 const Calculator = () => {
 
