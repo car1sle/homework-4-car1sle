@@ -50,9 +50,9 @@ const Calculator = () => {
   };
 
   return (
-    <div>
+    <div style={{ border: "5px solid #02040F", borderRadius: "10px", padding: "0.7rem", backgroundColor: "#f2f2f2",}}>
       <Screen value={displayCount} />
-      <div style={{ display: "flex", gap: "0.5rem" }}>
+      <div style={{ display: "flex", gap: "0.6rem" }}>
         <div style={{ flexBasis: "33%", flexGrow: "1" }}>
           <Number value={0} onClick={handleNumberClick} />
           <Number value={1} onClick={handleNumberClick} />
