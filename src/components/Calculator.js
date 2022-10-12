@@ -13,6 +13,7 @@ const Calculator = () => {
   /** TODO: what happens when I click a number? */
   const handleNumberClick = value => {
     if (operator) {
+      // eslint-disable-next-line no-eval
       setCount(eval(`parseInt(count) ${operator} value`));
       setDisplayCount(value);
     } else {
@@ -41,7 +42,7 @@ const Calculator = () => {
 
   const makeKeys = (type,[a,b,c,d,e]) => {
     let keys;
-    if (type=="number") {
+    if (type === "number") {
       keys = [a,b,c,d,e].map(n => <Number key={n} value={n} onClick={handleNumberClick} />);
     } else {
       keys = [a,b,c,d,e].map(n => <Operation key={n} value={n} onClick={handleOperationClick} />);
