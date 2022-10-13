@@ -21,8 +21,8 @@ const Calculator = () => {
         setCount(value);
         setDisplayCount(value);
       } else {
-        setCount(parseInt('' + count + value));
-        setDisplayCount(parseInt('' + count + value));
+        setCount(parseInt(count.toString().concat(value.toString())));
+        setDisplayCount(parseInt(count.toString().concat(value.toString())));
       }
     }
   };
@@ -54,8 +54,8 @@ const Calculator = () => {
     <div style={{ border: "5px solid #02040F", borderRadius: "10px", padding: "0.7rem", backgroundColor: "#f2f2f2",}}>
       <Screen value={displayCount} />
       <div style={{ display: "flex", gap: "0.6rem" }}>
-        {makeKeys("number", [0,1,2,3,4])}
-        {makeKeys("number", [5,6,7,8,9])}
+        {makeKeys("number", [8,6,4,2,0])}
+        {makeKeys("number", [9,7,5,3,1])}
         {makeKeys("operation", ['+','-','*','/','='])}
       </div>
       <div>
