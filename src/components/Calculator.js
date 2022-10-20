@@ -1,40 +1,67 @@
 import Number from "./Number";
 import Operation from "./Operation";
 import Screen from "./Screen";
+import { useState } from 'react';
 
 const Calculator = () => {
+
   /** TODO: Here is where you are going to keep track of calculator state */
+  const [count, setCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState(0);
+  const [operator, setOperator] = useState('');
 
   /** TODO: what happens when I click a number? */
-  const handleNumberClick = () => {};
+  const handleNumberClick = value => {
+    if (operator) {
+      // eslint-disable-next-line no-eval
+      setCount(eval(`parseInt(count) ${operator} value`));
+      setDisplayCount(value);
+    } else {
+      if (parseInt(count) === 0) {
+        setCount(value);
+        setDisplayCount(value);
+      } else {
+        setCount(parseInt(count.toString().concat(value.toString())));
+        setDisplayCount(parseInt(count.toString().concat(value.toString())));
+      }
+    }
+  };
 
   /** TODO: what happens when I click an operation? */
-  const handleOperationClick = () => {};
+  const handleOperationClick = value => {
+    if (value === "clear") {
+      setCount(0);
+      setDisplayCount(0);
+      setOperator('');
+    } else if (value === "=") {
+      setDisplayCount(count);
+    } else {
+      setOperator(value);
+    }
+  };
 
+  const makeKeys = (type, keysArr) => (
+    <div style={{ flexBasis: "33%", flexGrow: "1" }}>
+      {keysArr.map(n => {
+        if (type === "number") {
+          return <Number key={n} value={n} onClick={handleNumberClick} />;
+        } else {
+          return <Operation key={n} value={n} onClick={handleOperationClick} />;
+        };
+      })}
+    </div>
+  );
+  
   return (
-    <div>
-      <Screen value="123" />
-      <div style={{ display: "flex" }}>
-        <div>
-          <Number value={0} onClick={handleNumberClick} />
-          <Number value={1} onClick={handleNumberClick} />
-          <Number value={2} onClick={handleNumberClick} />
-          <Number value={3} onClick={handleNumberClick} />
-          <Number value={4} onClick={handleNumberClick} />
-          <Number value={5} onClick={handleNumberClick} />
-          <Number value={6} onClick={handleNumberClick} />
-          <Number value={7} onClick={handleNumberClick} />
-          <Number value={8} onClick={handleNumberClick} />
-          <Number value={9} onClick={handleNumberClick} />
-        </div>
-        <div style={{ paddingLeft: 10 }}>
-          <Operation value="+" onClick={handleOperationClick} />
-          <Operation value="/" onClick={handleOperationClick} />
-          <Operation value="x" onClick={handleOperationClick} />
-          <Operation value="-" onClick={handleOperationClick} />
-          <Operation value="=" onClick={handleOperationClick} />
-          <Operation value="clear" onClick={handleOperationClick} />
-        </div>
+    <div style={{ border: "5px solid #02040F", borderRadius: "10px", padding: "0.7rem", backgroundColor: "#f2f2f2",}}>
+      <Screen value={displayCount} />
+      <div style={{ display: "flex", gap: "0.6rem" }}>
+        {makeKeys("number", [8,6,4,2,0])}
+        {makeKeys("number", [9,7,5,3,1])}
+        {makeKeys("operation", ['+','-','*','/','='])}
+      </div>
+      <div>
+        {makeKeys("operation", ['clear'])}
       </div>
     </div>
   );
