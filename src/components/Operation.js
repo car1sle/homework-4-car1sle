@@ -31,8 +31,8 @@ const StyledOperation = styled.div`
 `;
 
 const Operation = ({ value, onClick }) => {
-  /** TODO: What happens when a user clicks an Operation, what do we want to pass to our parent? */
-  if (value) return (
+  /** What happens when a user clicks an Operation, what do we want to pass to our parent? */
+  return (
     <StyledOperation onClick={event => onClick(value)} value={value}>
       {value}
     </StyledOperation>

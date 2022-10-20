@@ -40,15 +40,17 @@ const Calculator = () => {
     }
   };
 
-  const makeKeys = (type,[a,b,c,d,e]) => {
-    let keys;
-    if (type === "number") {
-      keys = [a,b,c,d,e].map(n => <Number key={n} value={n} onClick={handleNumberClick} />);
-    } else {
-      keys = [a,b,c,d,e].map(n => <Operation key={n} value={n} onClick={handleOperationClick} />);
-    };
-    return <div style={{ flexBasis: "33%", flexGrow: "1" }}>{keys}</div>
-  };
+  const makeKeys = (type, keysArr) => (
+    <div style={{ flexBasis: "33%", flexGrow: "1" }}>
+      {keysArr.map(n => {
+        if (type === "number") {
+          return <Number key={n} value={n} onClick={handleNumberClick} />;
+        } else {
+          return <Operation key={n} value={n} onClick={handleOperationClick} />;
+        };
+      })}
+    </div>
+  );
   
   return (
     <div style={{ border: "5px solid #02040F", borderRadius: "10px", padding: "0.7rem", backgroundColor: "#f2f2f2",}}>
